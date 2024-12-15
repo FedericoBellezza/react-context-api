@@ -12,9 +12,11 @@ export default function PostShow() {
       .then((res) => res.json())
       .then((data) => {
         setPostShow(data);
+
         console.log(url);
       });
   }, []);
+  console.log(postShow);
 
   return (
     <>

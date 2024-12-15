@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 // Contexts
-import { PostContext } from "./contexts/PostsContext";
+import PostContext from "./contexts/PostsContext";
 
 // Layouts
 import DefaultLayout from "./Layouts/DefaultLayout";
@@ -9,19 +10,24 @@ import DefaultLayout from "./Layouts/DefaultLayout";
 // Pages
 import HomePage from "./Pages/HomePage";
 import AboutPage from "./Pages/AboutPage";
+
 // Post pages
 import PostCard from "./Pages/Posts/PostCard";
 import PostPage from "./Pages/Posts/PostPage";
 
 function App() {
   // Fetch post list
-  let globalData;
+  const [globalData, setGlobalData] = useState();
+
   const apiUrl = import.meta.env.VITE_API_URL;
-  fetch(apiUrl + "/posts")
-    .then((res) => res.json())
-    .then((data) => {
-      globalData = data;
-    });
+
+  useEffect(() => {
+    fetch(apiUrl + "/posts")
+      .then((res) => res.json())
+      .then((data) => {
+        setGlobalData(data);
+      });
+  }, []);
 
   return (
     <PostContext.Provider value={globalData}>
