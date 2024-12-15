@@ -1,0 +1,18 @@
+.hero {
+  height: 700px;
+  background-image: url(https://media-assets.lacucinaitaliana.it/photos/62fbc368369d53e9de69526b/16:9/w_2560%2Cc_limit/ricette%2520estive_.jpg);
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 7rem;
+  font-weight: bold;
+  color: white;
+}
+.bg-shadow {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
