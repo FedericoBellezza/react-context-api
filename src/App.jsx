@@ -1,5 +1,8 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+// Contexts
+import { PostContext } from "./contexts/PostsContext";
+
 // Layouts
 import DefaultLayout from "./Layouts/DefaultLayout";
 
@@ -11,19 +14,30 @@ import PostCard from "./Pages/Posts/PostCard";
 import PostPage from "./Pages/Posts/PostPage";
 
 function App() {
+  // Fetch post list
+  let globalData;
+  const apiUrl = import.meta.env.VITE_API_URL;
+  fetch(apiUrl + "/posts")
+    .then((res) => res.json())
+    .then((data) => {
+      globalData = data;
+    });
+
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route Component={DefaultLayout}>
-          <Route index Component={HomePage}></Route>
-          <Route path="/about" Component={AboutPage}></Route>
-          <Route path="/posts">
-            <Route index Component={PostPage}></Route>
-            <Route path=":id" Component={PostCard}></Route>
+    <PostContext.Provider value={globalData}>
+      <BrowserRouter>
+        <Routes>
+          <Route Component={DefaultLayout}>
+            <Route index Component={HomePage}></Route>
+            <Route path="/about" Component={AboutPage}></Route>
+            <Route path="/posts">
+              <Route index Component={PostPage}></Route>
+              <Route path=":id" Component={PostCard}></Route>
+            </Route>
           </Route>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+        </Routes>
+      </BrowserRouter>
+    </PostContext.Provider>
   );
 }
 

@@ -1,21 +1,26 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { PostContext } from "../contexts/PostsContext";
 
 export default function PostList() {
-  const apiUrl = import.meta.env.VITE_API_URL;
-  const [posts, setPost] = useState([]);
-  useEffect(() => {
-    fetch(apiUrl + "/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        setPost(data.posts);
-      });
-  }, []);
+  const posts = useContext(PostContext);
   console.log(posts);
+
+  // const apiUrl = import.meta.env.VITE_API_URL;
+  // const [posts, setPost] = useState([]);
+  // useEffect(() => {
+  //   fetch(apiUrl + "/posts")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setPost(data.posts);
+  //     });
+  // }, []);
+  // console.log(posts);
 
   return (
     <>
-      <div className="container mt-5">
+      {/* <div className="container mt-5">
         <table className="table mt-4">
           <thead>
             <tr>
@@ -54,7 +59,7 @@ export default function PostList() {
             ))}
           </tbody>
         </table>
-      </div>
+      </div> */}
     </>
   );
 }
