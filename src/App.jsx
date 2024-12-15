@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
 // Contexts
-import PostContext from "./contexts/PostsContext";
+import { PostContextProvider } from "./contexts/PostsContext";
 
 // Layouts
 import DefaultLayout from "./Layouts/DefaultLayout";
@@ -16,21 +16,8 @@ import PostCard from "./Pages/Posts/PostCard";
 import PostPage from "./Pages/Posts/PostPage";
 
 function App() {
-  // Fetch post list
-  const [globalData, setGlobalData] = useState();
-
-  const apiUrl = import.meta.env.VITE_API_URL;
-
-  useEffect(() => {
-    fetch(apiUrl + "/posts")
-      .then((res) => res.json())
-      .then((data) => {
-        setGlobalData(data);
-      });
-  }, []);
-
   return (
-    <PostContext.Provider value={globalData}>
+    <PostContextProvider>
       <BrowserRouter>
         <Routes>
           <Route Component={DefaultLayout}>
@@ -43,7 +30,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-    </PostContext.Provider>
+    </PostContextProvider>
   );
 }
 

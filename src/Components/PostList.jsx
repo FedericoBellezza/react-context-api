@@ -1,11 +1,10 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
-import PostContext from "../contexts/PostsContext";
+import { PostContext, PostContextProvider } from "../contexts/PostsContext";
 
 export default function PostList() {
   const { posts } = useContext(PostContext);
   console.log(posts);
-
   return (
     <>
       <div className="container mt-5">
