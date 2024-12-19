@@ -4,7 +4,7 @@ export const PostContext = createContext();
 
 export const PostContextProvider = ({ children }) => {
   // Fetch post list
-  const [globalData, setGlobalData] = useState();
+  const [globalData, setGlobalData] = useState([]);
 
   const apiUrl = import.meta.env.VITE_API_URL;
 
